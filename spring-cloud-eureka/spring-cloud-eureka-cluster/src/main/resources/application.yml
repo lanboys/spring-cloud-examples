@@ -4,36 +4,49 @@ spring:
     name: spring-cloud-eureka
   profiles: peer1
 server:
-  port: 8000
+  port: 8001
 eureka:
   instance:
     hostname: peer1
   client:
     serviceUrl:
-      defaultZone: http://peer2:8001/eureka/,http://peer3:8002/eureka/
+      defaultZone: http://peer2:8002/eureka/,http://peer3:8003/eureka/,http://peer4:8004/eureka/
 ---
 spring:
   application:
     name: spring-cloud-eureka
   profiles: peer2
 server:
-  port: 8001
+  port: 8002
 eureka:
   instance:
     hostname: peer2
   client:
     serviceUrl:
-      defaultZone: http://peer1:8000/eureka/,http://peer3:8002/eureka/
+      defaultZone: http://peer1:8001/eureka/,http://peer3:8003/eureka/,http://peer4:8004/eureka/
 ---
 spring:
   application:
     name: spring-cloud-eureka
   profiles: peer3
 server:
-  port: 8002
+  port: 8003
 eureka:
   instance:
     hostname: peer3
   client:
     serviceUrl:
-      defaultZone: http://peer1:8000/eureka/,http://peer2:8001/eureka/
+      defaultZone: http://peer1:8001/eureka/,http://peer2:8002/eureka/,http://peer4:8004/eureka/
+---
+spring:
+  application:
+    name: spring-cloud-eureka
+  profiles: peer4
+server:
+  port: 8004
+eureka:
+  instance:
+    hostname: peer4
+  client:
+    serviceUrl:
+      defaultZone: http://peer1:8001/eureka/,http://peer2:8002/eureka/,http://peer3:8003/eureka/
