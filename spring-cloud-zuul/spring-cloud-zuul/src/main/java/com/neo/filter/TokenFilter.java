@@ -2,6 +2,7 @@ package com.neo.filter;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
+
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,5 +50,4 @@ public class TokenFilter extends ZuulFilter {
             return null;
         }
     }
-
 }

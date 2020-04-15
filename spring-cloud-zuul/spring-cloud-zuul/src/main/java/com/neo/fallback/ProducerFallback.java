@@ -1,6 +1,5 @@
 package com.neo.fallback;
 
-import com.neo.filter.TokenFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.netflix.zuul.filters.route.FallbackProvider;
@@ -16,6 +15,7 @@ import java.io.InputStream;
 
 @Component
 public class ProducerFallback implements FallbackProvider {
+
     private final Logger logger = LoggerFactory.getLogger(FallbackProvider.class);
 
     //指定要处理的 service。
@@ -64,7 +64,7 @@ public class ProducerFallback implements FallbackProvider {
     public ClientHttpResponse fallbackResponse(Throwable cause) {
         if (cause != null && cause.getCause() != null) {
             String reason = cause.getCause().getMessage();
-            logger.info("Excption {}",reason);
+            logger.info("Exception {}", reason);
         }
         return fallbackResponse();
     }
