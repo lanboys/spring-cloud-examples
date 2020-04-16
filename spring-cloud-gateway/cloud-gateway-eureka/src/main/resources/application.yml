@@ -13,12 +13,12 @@ spring:
         locator:
          enabled: true
      routes:
-     - id: nameRoot
-       uri: lb://spring-cloud-producer
-       predicates:
-       - Path=/name/**
-       filters:
-       - StripPrefix=2
+#     - id: nameRoot
+#       uri: lb://spring-cloud-producer
+#       predicates:
+#       - Path=/name/**
+#       filters:
+#       - StripPrefix=2
      - id: add_request_parameter_route
 #       uri: http://localhost:9000
        uri: lb://spring-cloud-producer
@@ -26,34 +26,34 @@ spring:
        - AddRequestParameter=foo, bar
        predicates:
          - Method=GET
-     - id: requestratelimiter_route
-       uri: lb://spring-cloud-producer
-       filters:
-       - name: RequestRateLimiter
-         args:
-           redis-rate-limiter.replenishRate: 10
-           redis-rate-limiter.burstCapacity: 20
-           key-resolver: "#{@userKeyResolver}"
-       predicates:
-         - Method=GET
-     - id: hystrix_route
-       uri: lb://spring-cloud-producer
-       predicates:
-       - Path=/consumingserviceendpoint
-       filters:
-       - name: Hystrix
-         args:
-           name: fallbackcmd
-           fallbackUri: forward:/incaseoffailureusethis
-     - id: retry_test
-       uri: lb://spring-cloud-producer
-       predicates:
-       - Path=/retry
-       filters:
-       - name: Retry
-         args:
-           retries: 3
-           statuses: BAD_GATEWAY
+#     - id: requestratelimiter_route
+#       uri: lb://spring-cloud-producer
+#       filters:
+#       - name: RequestRateLimiter
+#         args:
+#           redis-rate-limiter.replenishRate: 10
+#           redis-rate-limiter.burstCapacity: 20
+#           key-resolver: "#{@userKeyResolver}"
+#       predicates:
+#         - Method=GET
+#     - id: hystrix_route
+#       uri: lb://spring-cloud-producer
+#       predicates:
+#       - Path=/consumingserviceendpoint
+#       filters:
+#       - name: Hystrix
+#         args:
+#           name: fallbackcmd
+#           fallbackUri: forward:/incaseoffailureusethis
+#     - id: retry_test
+#       uri: lb://spring-cloud-producer
+#       predicates:
+#       - Path=/retry
+#       filters:
+#       - name: Retry
+#         args:
+#           retries: 3
+#           statuses: BAD_GATEWAY
 eureka:
   client:
     service-url:
