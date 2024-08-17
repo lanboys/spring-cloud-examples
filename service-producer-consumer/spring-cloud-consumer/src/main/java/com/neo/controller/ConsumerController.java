@@ -13,8 +13,12 @@ public class ConsumerController {
     @Autowired
     HelloRemote HelloRemote;
 
+    /**
+     * http://localhost:9000/hello/xxxxx
+     */
     @RequestMapping("/hello/{name}")
     public String index(@PathVariable("name") String name) {
+        System.out.println("hello " + name);
         return HelloRemote.hello(name);
     }
 }
